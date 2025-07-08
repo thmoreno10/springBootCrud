@@ -3,6 +3,8 @@ package com.curso.clase04.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,17 +26,17 @@ public class UserController {
 
 
     @GetMapping("")
-    public List<User> getAllUsers() {
-        return userService.findAll();
+    public  ResponseEntity<List<User>> getAllUsers() {
+        return new ResponseEntity<List<User>>(userService.findAll(), HttpStatus.ACCEPTED);        
     }
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Integer id) {
-        return userService.getUserbyId(id);
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+        return new ResponseEntity<User>(userService.getUserbyId(id),HttpStatus.OK);               
     }
 
     @PostMapping("/add")
-    public User createUser(@RequestBody User user) {
-        return userService.create(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return new ResponseEntity<User>(userService.create(user),HttpStatus.CREATED);        
     }
 
     @PutMapping("/update")
