@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-@CrossOrigin(origins = "http://localhost:4200",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Allow-Methods, Content-Type, Authorization")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -35,11 +35,11 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return new ResponseEntity<User>(userService.getUserbyId(id),HttpStatus.OK);               
     }
-   /*  @GetMapping("/{id}")
+     @GetMapping("/{id}")
     public UserDto getUserById1(@PathVariable Integer id) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(userService.getUserbyId(id), UserDto.class); 
-    }*/
+    }
 
     @PostMapping("/add")
     public ResponseEntity<User> createUser(@RequestBody User user) {
